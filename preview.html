@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative IQ | Digital Marketing & Website Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --purple:#6d28d9;
+      --purple-2:#8b5cf6;
+      --purple-3:#f3e8ff;
+      --ink:#151124;
+      --muted:#6b647a;
+      --white:#ffffff;
+      --soft:#fbf8ff;
+      --border:#eadcff;
+      --shadow:0 24px 70px rgba(70, 34, 130, .14);
+      --radius:28px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--soft);color:var(--ink);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .bg-glow{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 15% 5%,rgba(139,92,246,.22),transparent 28%),radial-gradient(circle at 85% 10%,rgba(109,40,217,.18),transparent 30%),radial-gradient(circle at 50% 95%,rgba(196,181,253,.32),transparent 30%)}
+    .container{width:min(1160px,92%);margin:auto}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(234,220,255,.7)}
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{height:52px;width:auto;object-fit:contain;display:block}
+    .nav-links{display:flex;gap:24px;align-items:center;color:#4a415d;font-size:14px;font-weight:700}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;background:linear-gradient(135deg,var(--purple),var(--purple-2));color:white;font-weight:800;box-shadow:0 18px 38px rgba(109,40,217,.24);border:0;cursor:pointer;transition:.25s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 25px 48px rgba(109,40,217,.32)}
+    .btn.secondary{background:white;color:var(--purple);border:1px solid var(--border);box-shadow:none}
+    .hero{padding:88px 0 60px}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+    .eyebrow{display:inline-flex;gap:10px;align-items:center;background:white;border:1px solid var(--border);padding:9px 14px;border-radius:999px;color:var(--purple);font-weight:800;font-size:13px;box-shadow:0 10px 35px rgba(109,40,217,.08);margin-bottom:22px}
+    h1{font-size:clamp(44px,7vw,78px);line-height:.94;letter-spacing:-.075em;font-weight:900;margin-bottom:24px}
+    .gradient-text{background:linear-gradient(135deg,var(--purple),#b453ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:20px;color:var(--muted);max-width:650px;margin-bottom:30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px}
+    .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:640px}
+    .proof-card{background:white;border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 14px 35px rgba(70,34,130,.07)}
+    .proof-card strong{display:block;font-size:24px;color:var(--purple);line-height:1}.proof-card span{font-size:13px;color:var(--muted);font-weight:700}
+    .hero-img-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);line-height:0}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius)}
+    section{padding:72px 0}.section-head{text-align:center;max-width:760px;margin:0 auto 42px}.section-head h2{font-size:clamp(32px,4vw,52px);line-height:1;letter-spacing:-.055em;margin-bottom:16px}.section-head p{color:var(--muted);font-size:18px}
+    .grid{display:grid;gap:22px}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}
+    .card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:0 18px 50px rgba(70,34,130,.08);transition:.25s ease}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .card h3{font-size:23px;letter-spacing:-.035em;margin:16px 0 10px}.card p,.card li{color:var(--muted)}
+    .badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--purple-3);color:var(--purple);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+    ul{list-style:none;margin-top:16px}li{padding:8px 0;display:flex;gap:10px}.check{color:var(--purple);font-weight:900}
+    .compare{background:linear-gradient(135deg,var(--purple),#4c1d95);color:white;border-radius:36px;padding:42px;box-shadow:var(--shadow)}
+    .compare p{color:#eadcff}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}.compare-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:24px}.compare-box h3{font-size:24px;margin-bottom:12px}.compare-box li{color:#fff}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:week}.time-card{position:relative}.time-card:before{counter-increment:week;content:counter(week);width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-2));color:white;display:grid;place-items:center;font-weight:900;margin-bottom:16px;box-shadow:0 12px 28px rgba(109,40,217,.22)}
+    .pricing .card{display:flex;flex-direction:column}.price{font-size:30px;font-weight:900;color:var(--purple);letter-spacing:-.04em;margin:10px 0}.popular{outline:3px solid rgba(139,92,246,.25);transform:scale(1.02)}
+    .workflow{background:white;border:1px solid var(--border);border-radius:36px;padding:16px;box-shadow:var(--shadow)}.days{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.day{padding:18px;border-radius:22px;background:#faf5ff;border:1px solid var(--border)}.day b{color:var(--purple);display:block;margin-bottom:8px}.day span{font-size:13px;color:var(--muted);font-weight:700}
+    .cta{padding-bottom:96px}.cta-box{text-align:center;background:linear-gradient(135deg,#fff,#f4eaff);border:1px solid var(--border);border-radius:44px;padding:58px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}.cta-box:before,.cta-box:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(139,92,246,.16)}.cta-box:before{left:-60px;top:-60px}.cta-box:after{right:-60px;bottom:-60px}.cta-box>*{position:relative}.cta-box h2{font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.06em;margin-bottom:16px}.cta-box p{color:var(--muted);font-size:18px;max-width:700px;margin:0 auto 28px}
+    footer{padding:32px 0;border-top:1px solid var(--border);background:white;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-weight:700;font-size:14px}
+    @media (max-width:900px){.hero-grid,.grid-3,.grid-2,.compare-grid,.timeline{grid-template-columns:1fr}.nav-links{display:none}.proof{grid-template-columns:1fr}.days{grid-template-columns:repeat(2,1fr)}.hero{padding-top:56px}.compare{padding:28px}}
+    @media (max-width:540px){.days{grid-template-columns:1fr}.hero-actions .btn{width:100%}.footer-inner{flex-direction:column;text-align:center}section{padding:54px 0}}
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo"><img src="resources/1.png" alt="Creative IQ"></a>
+      <div class="nav-links">
+        <a href="#services">Services</a><a href="#packages">Packages</a><a href="#plan">30-Day Plan</a><a href="#contact" class="btn">Get Free Audit</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">⚡ Digital Marketing & Website Development</div>
+        <h1>Grow Your Business <span class="gradient-text">Online</span> With Creative IQ</h1>
+        <p class="lead">We help local businesses grow with professional websites, SEO, and social media management — everything you need in one place.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn">Get Free Growth Audit →</a>
+          <a href="#system" class="btn secondary">See The System</a>
+        </div>
+        <div class="proof">
+          <div class="proof-card"><strong>AI</strong><span>Automation-first marketing</span></div>
+          <div class="proof-card"><strong>0₹</strong><span>Low-investment growth model</span></div>
+          <div class="proof-card"><strong>Lead</strong><span>Not just likes & posts</span></div>
+        </div>
+      </div>
+      <div class="hero-img-wrap" id="system">
+        <img src="resources/2.png" alt="Creative IQ Expert">
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container compare">
+      <div class="section-head" style="text-align:left;margin:0 0 8px;max-width:900px">
+        <h2>Agencies give you posts. We give you a lead machine.</h2>
+        <p>Creative content is not enough. Your business needs a system that generates, captures, follows up, and tracks leads.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-box"><h3>Normal Agency</h3><ul><li>✦ Social media posts</li><li>✦ Random reels</li><li>✦ Captions and branding</li><li>✦ Likes-focused reporting</li></ul></div>
+        <div class="compare-box"><h3>AI Growth Lab</h3><ul><li>✦ Reel-to-lead funnels</li><li>✦ WhatsApp inquiry system</li><li>✦ AI reply and follow-up</li><li>✦ Lead tracking and reports</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head"><h2>What We Build</h2><p>A complete growth system for clinics, coaching classes, salons, restaurants, real estate brokers, and local service providers.</p></div>
+      <div class="grid grid-3">
+        <div class="card"><span class="badge">Funnel</span><h3>AI Lead Funnel</h3><p>Landing page, WhatsApp CTA, lead forms, CRM and follow-up system.</p></div>
+        <div class="card"><span class="badge">Content</span><h3>Content Engine</h3><p>Reels, hooks, captions, carousels, offers and local festival content.</p></div>
+        <div class="card"><span class="badge">Automation</span><h3>AI Assistant</h3><p>FAQ bot, appointment flow, lead qualification, auto-replies and booking support.</p></div>
+        <div class="card"><span class="badge">Local</span><h3>Local Growth</h3><p>Google Business Profile, reviews, map ranking basics and location pages.</p></div>
+        <div class="card"><span class="badge">Reports</span><h3>Weekly Reporting</h3><p>Leads generated, source tracking, best content and next-week action plan.</p></div>
+        <div class="card"><span class="badge">Tool</span><h3>Content-to-Funnel Generator</h3><p>AI system that creates hooks, captions, ad copies, landing page copy and WhatsApp scripts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" class="pricing">
+    <div class="container">
+      <div class="section-head"><h2>Our Packages</h2><p>Everything your business needs to grow online — website, SEO, and social media.</p></div>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="badge">Website</span>
+          <h3>Website Development</h3>
+          <div class="price">₹15,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">one-time</span></div>
+          <ul>
+            <li><span class="check">✓</span>Custom Business Website</li>
+            <li><span class="check">✓</span>15–20 Webpages</li>
+            <li><span class="check">✓</span>Mobile Responsive Design</li>
+            <li><span class="check">✓</span>Basic SEO-Friendly Structure</li>
+            <li><span class="check">✓</span>Contact Form Integration</li>
+            <li><span class="check">✓</span>WhatsApp Integration</li>
+            <li><span class="check">✓</span>Fast Loading Optimization</li>
+            <li><span class="check">✓</span>Social Media Integration</li>
+            <li><span class="check">✓</span>Google Maps Integration</li>
+            <li><span class="check">✓</span>SSL Setup</li>
+            <li><span class="check">✓</span>Admin Panel Access</li>
+          </ul>
+        </div>
+        <div class="card popular">
+          <span class="badge">SEO</span>
+          <h3>Search Engine Optimization</h3>
+          <div class="price">₹3,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">/month</span></div>
+          <ul>
+            <li><span class="check">✓</span>5 Keyword Targeting</li>
+            <li><span class="check">✓</span>On-Page SEO Optimization</li>
+            <li><span class="check">✓</span>Meta Title & Description Setup</li>
+            <li><span class="check">✓</span>Image Alt Tag Optimization</li>
+            <li><span class="check">✓</span>Google Search Console Setup</li>
+            <li><span class="check">✓</span>Sitemap Submission</li>
+            <li><span class="check">✓</span>Basic Technical SEO</li>
+            <li><span class="check">✓</span>Monthly SEO Monitoring</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge">Social</span>
+          <h3>Social Media Management</h3>
+          <div class="price">₹7,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">/month</span></div>
+          <ul>
+            <li><span class="check">✓</span>4 Professional Posts</li>
+            <li><span class="check">✓</span>4 Creative Reels</li>
+            <li><span class="check">✓</span>Weekly Posting Schedule</li>
+            <li><span class="check">✓</span>Caption Writing</li>
+            <li><span class="check">✓</span>Hashtag Research</li>
+            <li><span class="check">✓</span>Content Planning</li>
+            <li><span class="check">✓</span>Brand Consistency Management</li>
+            <li><span class="check">✓</span>Social Media Optimization</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:32px;text-align:center">
+        <div style="display:inline-flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--purple),#4c1d95);color:white;border-radius:24px;padding:24px 48px;box-shadow:var(--shadow)">
+          <div>
+            <div style="font-size:13px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.06em">Total Package</div>
+            <div style="font-size:42px;font-weight:900;letter-spacing:-.04em;line-height:1">₹25,000</div>
+            <div style="font-size:14px;font-weight:600;opacity:.8">Website + SEO + Social Media</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head"><h2>Best Niches To Start</h2><p>Start with one niche where leads have high value and business owners understand the need for inquiries.</p></div>
+      <div class="grid grid-3">
+        <div class="card"><h3>Clinics & Doctors</h3><p>AI appointment and patient inquiry system.</p></div>
+        <div class="card"><h3>Coaching Classes</h3><p>AI admission inquiry + reels + WhatsApp follow-up.</p></div>
+        <div class="card"><h3>Real Estate</h3><p>Property lead funnel with WhatsApp automation.</p></div>
+        <div class="card"><h3>Restaurants & Cafes</h3><p>Reels + Google Maps + WhatsApp ordering growth system.</p></div>
+        <div class="card"><h3>Salons & Beauty Clinics</h3><p>Instagram-to-booking AI system.</p></div>
+        <div class="card"><h3>Local Services</h3><p>Search visibility, lead capture and follow-up automation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="container">
+      <div class="section-head"><h2>30-Day Launch Plan</h2><p>Use zero investment and prove the idea with demos, outreach, and founder pricing.</p></div>
+      <div class="timeline">
+        <div class="card time-card"><h3>Week 1</h3><p>Choose niche, create brand, build one-page website, demo funnel, 10 sample reels and pitch deck.</p></div>
+        <div class="card time-card"><h3>Week 2</h3><p>Contact 100 businesses, offer free audit, create personalized demos and book calls.</p></div>
+        <div class="card time-card"><h3>Week 3</h3><p>Close first 2–3 clients with founder pricing and collect advance payment.</p></div>
+        <div class="card time-card"><h3>Week 4</h3><p>Deliver results, show reports, collect testimonials and create case studies.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head"><h2>Weekly Client Workflow</h2><p>A repeatable system your team can execute every week.</p></div>
+      <div class="workflow"><div class="days">
+        <div class="day"><b>Monday</b><span>AI research, content plan, offer selection</span></div>
+        <div class="day"><b>Tuesday</b><span>Scripts, hooks, shoot/edit plan</span></div>
+        <div class="day"><b>Wednesday</b><span>Video editing and landing page updates</span></div>
+        <div class="day"><b>Thursday</b><span>Posting and WhatsApp flow testing</span></div>
+        <div class="day"><b>Friday</b><span>Lead tracking and client report</span></div>
+        <div class="day"><b>Saturday</b><span>Optimize next week and collect testimonials</span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Views are vanity. <span class="gradient-text">Leads are proof.</span></h2>
+        <p>Get a free mini demo: 3 reel ideas, one landing page preview, and a WhatsApp lead flow for your business.</p>
+        <a class="btn" href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20a%20free%20AI%20growth%20audit" target="_blank" rel="noopener">Chat on WhatsApp →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <img src="resources/1.png" alt="Creative IQ" style="height:44px;width:auto;object-fit:contain">
+      <span>Digital Marketing & Website Development</span>
+      <span>© 2026 Creative IQ. All rights reserved.</span>
+    </div>
+  </footer>
+</body>
+</html>
