@@ -95,7 +95,31 @@
     .campaign-action-primary { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: white; box-shadow: 0 10px 24px rgba(109,40,217,.16); }
     .campaign-card:hover .campaign-action-primary { box-shadow: 0 15px 30px rgba(109,40,217,.28); transform: translateY(-1px); }
 
-    @media (max-width:900px){.hero-grid,.grid-3,.grid-2,.compare-grid,.timeline,.pillars-grid,.campaigns-grid{grid-template-columns:1fr}.nav-links{display:none}.proof{grid-template-columns:1fr}.days{grid-template-columns:repeat(2,1fr)}.hero{padding-top:56px}.compare{padding:28px}}
+    /* Pricing Calculator Toggles */
+    .pricing-card { cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .pricing-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .calc-toggle { display: inline-flex; align-items: center; cursor: pointer; position: relative; }
+    .calc-toggle input { opacity: 0; width: 0; height: 0; }
+    .calc-toggle-slider { width: 48px; height: 24px; background-color: var(--border); border-radius: 34px; position: relative; transition: .25s ease; }
+    .calc-toggle-slider:before { content: ""; position: absolute; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; border-radius: 50%; transition: .25s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    .calc-toggle input:checked + .calc-toggle-slider { background: linear-gradient(135deg, var(--purple), var(--purple-2)); }
+    .calc-toggle input:checked + .calc-toggle-slider:before { transform: translateX(24px); }
+    
+    .pricing-card.pricing-active { border-color: var(--purple-2); outline: 3px solid rgba(139,92,246,.25); box-shadow: var(--shadow); transform: translateY(-4px); }
+    .pricing-card.pricing-active:hover { transform: translateY(-8px); }
+    
+    /* Interactive pricing footer */
+    .pricing-total-box { margin-top: 40px; display: flex; justify-content: center; }
+    .pricing-total-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; background: linear-gradient(135deg, var(--purple), #4c1d95); color: white; border-radius: 32px; padding: 32px 48px; box-shadow: var(--shadow); max-width: 600px; width: 100%; transition: all 0.3s ease; }
+    .pricing-cost-row { display: flex; justify-content: space-around; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 18px; gap: 20px; }
+    .pricing-cost-item { text-align: center; }
+    .pricing-cost-label { font-size: 11px; font-weight: 800; opacity: .8; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .pricing-cost-value { font-size: 38px; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+    .pricing-selected-list { font-size: 14.5px; font-weight: 700; opacity: .9; word-spacing: 0.05em; }
+    .pricing-cta-btn { background: white; color: var(--purple); font-weight: 900; font-size: 15px; padding: 14px 32px; border-radius: 99px; transition: all 0.25s ease; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 8px; text-decoration: none; cursor: pointer; }
+    .pricing-cta-btn:hover { background: #faf5ff; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.2); }
+
+    @media (max-width:900px){.hero-grid,.grid-3,.grid-2,.compare-grid,.timeline,.pillars-grid,.campaigns-grid{grid-template-columns:1fr}.nav-links{display:none}.proof{grid-template-columns:1fr}.days{grid-template-columns:repeat(2,1fr)}.hero{padding-top:56px}.compare{padding:28px}.pricing-total-inner{padding:28px 24px}.pricing-cost-row{flex-direction:column;gap:18px;align-items:center}}
     @media (max-width:540px){.days{grid-template-columns:1fr}.hero-actions .btn{width:100%}.footer-inner{flex-direction:column;text-align:center}section{padding:54px 0}}
   </style>
 </head>
@@ -253,10 +277,21 @@
 
   <section id="packages" class="pricing">
     <div class="container">
-      <div class="section-head"><h2>Our Packages</h2><p>Everything your business needs to grow online — website, SEO, and social media.</p></div>
+      <div class="section-head">
+        <span class="badge">Interactive Configurator</span>
+        <h2 style="margin-top: 12px;">Build Your Custom Package</h2>
+        <p>Choose exactly what your business needs. Toggle individual packages below to see your real-time investment calculation.</p>
+      </div>
       <div class="grid grid-3">
-        <div class="card">
-          <span class="badge">Website</span>
+        <!-- Card 1: Website -->
+        <div class="card pricing-card pricing-active" id="card-website" onclick="togglePackage('website')">
+          <div class="pricing-card-header">
+            <span class="badge" style="margin-bottom:0;">Website</span>
+            <label class="calc-toggle" onclick="event.stopPropagation()">
+              <input type="checkbox" id="toggle-website" checked onchange="updatePricing()">
+              <span class="calc-toggle-slider"></span>
+            </label>
+          </div>
           <h3>Website Development</h3>
           <div class="price">₹15,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">one-time</span></div>
           <ul>
@@ -273,8 +308,16 @@
             <li><span class="check">✓</span>Admin Panel Access</li>
           </ul>
         </div>
-        <div class="card popular">
-          <span class="badge">SEO</span>
+
+        <!-- Card 2: SEO -->
+        <div class="card pricing-card pricing-active" id="card-seo" onclick="togglePackage('seo')">
+          <div class="pricing-card-header">
+            <span class="badge" style="margin-bottom:0;">SEO</span>
+            <label class="calc-toggle" onclick="event.stopPropagation()">
+              <input type="checkbox" id="toggle-seo" checked onchange="updatePricing()">
+              <span class="calc-toggle-slider"></span>
+            </label>
+          </div>
           <h3>Search Engine Optimization</h3>
           <div class="price">₹3,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">/month</span></div>
           <ul>
@@ -288,8 +331,16 @@
             <li><span class="check">✓</span>Monthly SEO Monitoring</li>
           </ul>
         </div>
-        <div class="card">
-          <span class="badge">Social</span>
+
+        <!-- Card 3: Social Media -->
+        <div class="card pricing-card pricing-active" id="card-social" onclick="togglePackage('social')">
+          <div class="pricing-card-header">
+            <span class="badge" style="margin-bottom:0;">Social</span>
+            <label class="calc-toggle" onclick="event.stopPropagation()">
+              <input type="checkbox" id="toggle-social" checked onchange="updatePricing()">
+              <span class="calc-toggle-slider"></span>
+            </label>
+          </div>
           <h3>Social Media Management</h3>
           <div class="price">₹7,000 <span style="font-size:14px;font-weight:600;color:var(--muted)">/month</span></div>
           <ul>
@@ -304,13 +355,26 @@
           </ul>
         </div>
       </div>
-      <div style="margin-top:32px;text-align:center">
-        <div style="display:inline-flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--purple),#4c1d95);color:white;border-radius:24px;padding:24px 48px;box-shadow:var(--shadow)">
-          <div>
-            <div style="font-size:13px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.06em">Total Package</div>
-            <div style="font-size:42px;font-weight:900;letter-spacing:-.04em;line-height:1">₹25,000</div>
-            <div style="font-size:14px;font-weight:600;opacity:.8">Website + SEO + Social Media</div>
+
+      <!-- Dynamic Calculator Summary Widget -->
+      <div class="pricing-total-box">
+        <div class="pricing-total-inner">
+          <div class="pricing-cost-row">
+            <div class="pricing-cost-item">
+              <div class="pricing-cost-label">One-Time Investment</div>
+              <div class="pricing-cost-value" id="calc-onetime">₹15,000</div>
+            </div>
+            <div class="pricing-cost-item">
+              <div class="pricing-cost-label">Monthly retainer</div>
+              <div class="pricing-cost-value" id="calc-monthly">₹10,000</div>
+            </div>
           </div>
+          <div style="text-align: center;">
+            <div class="pricing-cost-label">Selected Features</div>
+            <div class="pricing-selected-list" id="calc-selected">Website + SEO + Social Media</div>
+            <div id="calc-bonus" style="font-size:12.5px;font-weight:700;color:#ffd3ff;margin-top:8px;">✨ All 3 Selected: Free CRM Integration & WhatsApp Lead Flow Setup Included (Worth ₹5,000!)</div>
+          </div>
+          <a id="pricing-whatsapp-btn" class="pricing-cta-btn" href="#" target="_blank" rel="noopener">Secure This Custom Plan →</a>
         </div>
       </div>
     </div>
@@ -353,7 +417,7 @@
               <span>High-Value Lead Magnets Creation</span>
             </li>
           </ul>
-          <a href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20to%20launch%20the%20Digital%20Marketing%20Offer%20Campaign" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Launch Campaign →</a>
+          <a href="https://wa.me/918320278775?text=Hi%2C%20I%20want%20to%20launch%20the%20Digital%20Marketing%20Offer%20Campaign" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Launch Campaign →</a>
         </div>
 
         <!-- Campaign 2: Creator Growth Incubator -->
@@ -385,7 +449,7 @@
               <span>Audience Growth & Monetization Plan</span>
             </li>
           </ul>
-          <a href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20to%20learn%20about%20the%20Creator%20Growth%20Incubator" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Join Incubator →</a>
+          <a href="https://wa.me/918320278775?text=Hi%2C%20I%20want%20to%20learn%20about%20the%20Creator%20Growth%20Incubator" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Join Incubator →</a>
         </div>
 
         <!-- Campaign 3: Influencer Marketing Engine -->
@@ -417,7 +481,7 @@
               <span>Clear Performance & Tracking Metrics</span>
             </li>
           </ul>
-          <a href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20to%20scale%20using%20the%20Influencer%20Marketing%20Engine" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Run Campaigns →</a>
+          <a href="https://wa.me/918320278775?text=Hi%2C%20I%20want%20to%20scale%20using%20the%20Influencer%20Marketing%20Engine" target="_blank" rel="noopener" class="campaign-action campaign-action-primary">Run Campaigns →</a>
         </div>
       </div>
     </div>
@@ -468,7 +532,7 @@
       <div class="cta-box">
         <h2>Views are vanity. <span class="gradient-text">Leads are proof.</span></h2>
         <p>Get a free mini demo: 3 reel ideas, one landing page preview, and a WhatsApp lead flow for your business.</p>
-        <a class="btn" href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20a%20free%20AI%20growth%20audit" target="_blank" rel="noopener">Chat on WhatsApp →</a>
+        <a class="btn" href="https://wa.me/918320278775?text=Hi%2C%20I%20want%20a%20free%20AI%20growth%20audit" target="_blank" rel="noopener">Chat on WhatsApp →</a>
       </div>
     </div>
   </section>
@@ -480,5 +544,73 @@
       <span>© 2026 Creative IQ. All rights reserved.</span>
     </div>
   </footer>
+
+  <script>
+    function togglePackage(id) {
+      const checkbox = document.getElementById('toggle-' + id);
+      checkbox.checked = !checkbox.checked;
+      updatePricing();
+    }
+    
+    function updatePricing() {
+      const websiteActive = document.getElementById('toggle-website').checked;
+      const seoActive = document.getElementById('toggle-seo').checked;
+      const socialActive = document.getElementById('toggle-social').checked;
+      
+      // Update card active classes
+      document.getElementById('card-website').classList.toggle('pricing-active', websiteActive);
+      document.getElementById('card-seo').classList.toggle('pricing-active', seoActive);
+      document.getElementById('card-social').classList.toggle('pricing-active', socialActive);
+      
+      let oneTimeTotal = 0;
+      let monthlyTotal = 0;
+      let selectedNames = [];
+      
+      if (websiteActive) {
+        oneTimeTotal += 15000;
+        selectedNames.push('Website');
+      }
+      if (seoActive) {
+        monthlyTotal += 3000;
+        selectedNames.push('SEO');
+      }
+      if (socialActive) {
+        monthlyTotal += 7000;
+        selectedNames.push('Social Media');
+      }
+      
+      // Special bundle bonus logic
+      let bonusText = '';
+      if (websiteActive && seoActive && socialActive) {
+        bonusText = '✨ All 3 Selected: Free CRM Integration & WhatsApp Lead Flow Setup Included (Worth ₹5,000!)';
+      } else if (selectedNames.length > 0) {
+        bonusText = '⚡ Custom bundle selected. Free growth consultation included!';
+      } else {
+        bonusText = '❌ Please select at least one package above to see your customized pricing.';
+      }
+      
+      // Format prices
+      document.getElementById('calc-onetime').innerText = '₹' + oneTimeTotal.toLocaleString('en-IN');
+      document.getElementById('calc-monthly').innerText = '₹' + monthlyTotal.toLocaleString('en-IN');
+      document.getElementById('calc-selected').innerText = selectedNames.length > 0 ? selectedNames.join(' + ') : 'No packages selected';
+      document.getElementById('calc-bonus').innerText = bonusText;
+      
+      // Update CTA WhatsApp link prefilled message
+      const ctaBtn = document.getElementById('pricing-whatsapp-btn');
+      if (selectedNames.length > 0) {
+        const message = encodeURIComponent('Hi, I am interested in Creative IQ\'s custom bundle: ' + selectedNames.join(' + ') + '. I would like a free AI growth audit for my business!');
+        ctaBtn.href = 'https://wa.me/918320278775?text=' + message;
+        ctaBtn.style.display = 'flex';
+      } else {
+        ctaBtn.href = '#packages';
+        ctaBtn.style.display = 'none';
+      }
+    }
+    
+    // Initialize pricing on page load
+    window.addEventListener('DOMContentLoaded', (event) => {
+      updatePricing();
+    });
+  </script>
 </body>
 </html>
