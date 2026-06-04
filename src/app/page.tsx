@@ -33,7 +33,7 @@ export default function Home() {
   <div className="bg-glow"></div>
   <nav className="nav">
     <div className="container nav-inner">
-      <a href="#" className="logo"><img src="resources/1.png" alt="Creative IQ" /></a>
+      <a href="#" className="logo"><img src="/resources/1.png" alt="Creative IQ" /></a>
       <div className="nav-links">
         <a href="#pillars">Pillars</a><a href="#services">Services</a><a href="#campaigns">Campaigns</a><a href="#packages">Packages</a><a href="#plan">30-Day Plan</a><a href="#contact" className="btn">Get Free Audit</a>
       </div>
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
       </div>
       <div className="hero-img-wrap" id="system">
-        <img src="resources/2.png" alt="Creative IQ Expert" />
+        <img src="/resources/2.png" alt="Creative IQ Expert" />
       </div>
     </div>
   </header>
@@ -440,7 +440,7 @@ export default function Home() {
 
   <footer>
     <div className="container footer-inner">
-      <img src="resources/1.png" alt="Creative IQ" style={{height: "44px", width: "auto", objectFit: "contain"}} />
+      <img src="/resources/1.png" alt="Creative IQ" style={{height: "44px", width: "auto", objectFit: "contain"}} />
       <span>Digital Marketing & Website Development</span>
       <span>© 2026 Creative IQ. All rights reserved.</span>
     </div>
